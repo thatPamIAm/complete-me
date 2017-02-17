@@ -73,12 +73,21 @@ describe('CompleteMe', () => {
     expect(completion.suggestions).to.deep.equal(['hell', 'hello']);
   });
 
+  it('should return null if there is no word in the tree that matches suggest', () => {
+    let completion = new CompleteMe();
+    completion.insert('hell');
+    completion.insert('hello');
+    completion.suggest('pizz');
+
+    expect(completion.suggestions).to.deep.equal([]);
+  });
+
   it('should have a function called populate that brings in the dictionary', () => {
     let completion = new CompleteMe();
     let text = '/usr/share/dict/words';
     let dictionary = fs.readFileSync(text).toString('utf-8').trim().split('\n');
     completion.populate(dictionary);
-    
+
     expect(completion.length).to.equal(235886);
   });
 

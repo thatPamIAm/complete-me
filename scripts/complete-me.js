@@ -28,7 +28,7 @@ class CompleteMe{
     let current = this.root;
     let letters = word.split('');
 
-    for (var i = 0; i < letters.length; i++) {
+    for (let i = 0; i < letters.length; i++) {
       if(current.children[letters[i]]) {
         current = current.children[letters[i]];
       } else {
@@ -38,17 +38,17 @@ class CompleteMe{
     this.words(current, word);
   }
 
-  words(current, word){
+  words(current, string){
 
     if(current.isComplete) {
-      this.suggestions.push(word);
+      this.suggestions.push(string);
     }
 
     let nodeKey = Object.keys(current.children);
 
-    for(var i = 0; i < nodeKey.length; i++){
+    for(let i = 0; i < nodeKey.length; i++){
       let node = current.children[nodeKey[i]];
-      this.words(node,  word + nodeKey);
+      this.words(node,  string + nodeKey);
     }
     return this.suggestions;
   }
@@ -59,7 +59,7 @@ class CompleteMe{
 
   populate(array){
 
-    for(var i = 0; i < array.length; i++){
+    for(let i = 0; i < array.length; i++){
       this.insert(array[i]);
     }
   }
